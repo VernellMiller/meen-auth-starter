@@ -28,16 +28,16 @@ db.on("error", (error) => {
 
 // Mount Middleware
 app.use(express.urlencoded({extended:false}));
-app.use("/users", userController);
 app.use(
     session({
         secret: process.env.SECRET,
         resave: false,
         saveUninitialized: false,
     })
-);
-app.use("/sessions", sessionController);
-app.use(methodOverride("_method"))
+    );
+    app.use(methodOverride("_method"))
+    app.use("/sessions", sessionController);
+    app.use("/users", userController);
 
 
 
@@ -47,9 +47,15 @@ app.use(methodOverride("_method"))
 
 // Index route
 app.get("/", (req, res) => {
-    res.render("index.ejs", {
-      currentUser: req.session.currentUser,
-    })
+    if (req.session.currentUser) {
+      res.render("dashboard.ejs", {
+        currentUser: req.session.currentUser,
+      })
+    } else {
+      res.render("index.ejs", {
+        currentUser: req.session.currentUser,
+      })
+    }
   });
 
 
