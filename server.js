@@ -2,6 +2,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const userController = require("./controllers/users");
+const session = require("express-session");
+const sessionController = require("./controllers/sessions")
 
 // Initialize express App
 const app = express();
@@ -26,6 +28,14 @@ db.on("error", (error) => {
 // Mount Middleware
 app.use(express.urlencoded({extended:false}));
 app.use("/users", userController);
+app.use(
+    session({
+        secret: process.env.SECRET,
+        resave: false,
+        saveUninitialized: false,
+    })
+);
+app.use("/sessions", sessionController);
 
 
 
