@@ -16,8 +16,10 @@ userRouter.post("/", (req, res) => {
 
 // New (registration page)
 userRouter.get("/new", (req, res) => {
-    res.render("users/new.ejs")
-  });
+    res.render("users/new.ejs", {
+      currentUser: req.session.currentUser,
+    })
+  })
 
 // Create (registration route)
 

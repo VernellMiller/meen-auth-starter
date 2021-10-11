@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const userController = require("./controllers/users");
 const session = require("express-session");
 const sessionController = require("./controllers/sessions")
+const methodOverride = require("method-override")
 
 // Initialize express App
 const app = express();
@@ -36,6 +37,7 @@ app.use(
     })
 );
 app.use("/sessions", sessionController);
+app.use(methodOverride("_method"))
 
 
 
@@ -45,8 +47,10 @@ app.use("/sessions", sessionController);
 
 // Index route
 app.get("/", (req, res) => {
-    res.render("index.ejs")
-});
+    res.render("index.ejs", {
+      currentUser: req.session.currentUser,
+    })
+  });
 
 
 // New Route
