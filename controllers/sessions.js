@@ -8,6 +8,11 @@ const User = require("../models/user.js");
 // New (login page)
 
 // Delete (logout route)
+sessionsRouter.delete("/", (req, res) => {
+    req.session.destroy((error) => {
+      res.redirect("/")
+    })
+  });
 
 // Create (login route)
 sessionsRouter.post("/", (req, res) => {
