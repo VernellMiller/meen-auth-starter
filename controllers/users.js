@@ -7,7 +7,11 @@ const User = require("../models/user.js");
 
 userRouter.post("/", (req, res) => {
     req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
-    res.send(req.body);
+
+    User.create(rea.body, (error, createdUser) => {
+
+        res.send(createdUser);
+    });
 });
 
 // New (registration page)
