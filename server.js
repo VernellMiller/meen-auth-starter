@@ -45,7 +45,7 @@ app.use("/sessions", sessionController);
 
 // Index route
 app.get("/", (req, res) => {
-    res.send("Hello World")
+    res.render("index.ejs")
 });
 
 
