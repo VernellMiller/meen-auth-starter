@@ -1,6 +1,7 @@
 // require dependencies
 const express = require("express");
 const mongoose = require("mongoose");
+const userController = require("./controllers/users");
 
 // Initialize express App
 const app = express();
@@ -21,6 +22,12 @@ db.on("connected", () => {
 db.on("error", (error) => {
     console.log(`An Error Occurred with MongoDB ${error.message}`)
 });
+
+// Mount Middleware
+app.use(express.urlencoded({extended:false}));
+app.use("/users", userController);
+
+
 
 
 //////// ROUTES INDUCES////////
