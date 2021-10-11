@@ -10,7 +10,7 @@ userRouter.post("/", (req, res) => {
 
     User.create(rea.body, (error, createdUser) => {
 
-        res.send(createdUser);
+        res.redirect("/");
     });
 });
 
